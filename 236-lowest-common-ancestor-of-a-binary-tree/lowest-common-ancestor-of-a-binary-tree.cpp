@@ -9,26 +9,24 @@
  */
 class Solution {
 public:
-    TreeNode* ans = NULL;
-
-    int dfs(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if (root == NULL)
-            return 0;
-
-        int left = dfs(root->left, p, q);
-        int right = dfs(root->right, p, q);
-
-        int self = (root == p || root == q);
-
-        int total = left + right + self;
-
-        if (total == 2 && ans == NULL)
-            ans = root;
-
-        return total;
-    }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        dfs(root, p, q);
-        return ans;
+
+        if(root==NULL)
+        return NULL;
+        
+        if(root==p || root==q)
+        return root;
+
+        TreeNode *left=lowestCommonAncestor(root->left,p,q);
+        TreeNode *right=lowestCommonAncestor(root->right,p,q);
+
+        if(left && right)
+        return root;
+
+        if(left)
+        return left;
+
+        return right;
+
     }
 };
