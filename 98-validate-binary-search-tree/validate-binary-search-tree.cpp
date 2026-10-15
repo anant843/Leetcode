@@ -10,21 +10,32 @@
  * right(right) {}
  * };
  */
+
 class Solution {
 public:
-    bool check(TreeNode* root, long long low, long long high) {
+    TreeNode* prev = NULL;
+    bool ans = true;
 
+    void ino(TreeNode* root) {
         if (root == NULL)
-            return true;
+            return;
 
-        if (root->val <= low || root->val >= high)
-            return false;
+        ino(root->left);
 
-        return check(root->left, low, root->val) &&
-               check(root->right, root->val, high);
+        if (prev == NULL)
+            prev = root;
+        else {
+            if (root->val <= prev->val)
+                ans = false;
+
+            prev = root;
+        }
+
+        ino(root->right);
     }
 
-    bool isValidBST(TreeNode* root) { 
-        return check(root, LONG_LONG_MIN, LONG_LONG_MAX); 
+    bool isValidBST(TreeNode* root) {
+        ino(root);
+        return ans;
     }
 };
