@@ -36,7 +36,6 @@ public:
         for(int i=0;i<inorder.size();i++){
             mp[inorder[i]]=i;
         }
-        idx=0;
 
         return fun(preorder,0,inorder.size()-1,mp);
     }
