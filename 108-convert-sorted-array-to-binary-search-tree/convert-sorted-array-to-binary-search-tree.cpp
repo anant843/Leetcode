@@ -24,7 +24,6 @@ public:
         return node;
      }
     TreeNode* sortedArrayToBST(vector<int>& nums) {
-        int high=nums.size()-1;
         return fun(nums,0,nums.size()-1);
     }
 };
